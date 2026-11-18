@@ -1,0 +1,46 @@
+
+backend:
+  name: turbo-github
+  turbo_site_id: 33b6616f-d47c-4179-a3bc-e727cc91e067
+  branch: main
+
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+collections:
+  - name: "projects"
+    label: "Property Projects"
+    label_singular: "Property Project"
+    folder: "content/projects"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - label: "Project Name"
+        name: "title"
+        widget: "string"
+      - label: "Location"
+        name: "location"
+        widget: "string"
+      - label: "Project Status"
+        name: "status"
+        widget: "select"
+        options:
+          - "Upcoming"
+          - "Ongoing"
+          - "Completed"
+      - label: "Property Type"
+        name: "property_type"
+        widget: "string"
+      - label: "Description"
+        name: "body"
+        widget: "markdown"
+      - label: "Main Project Image"
+        name: "image"
+        widget: "image"
+      - label: "Project Gallery"
+        name: "gallery"
+        widget: "list"
+        field:
+          label: "Image"
+          name: "image"
+          widget: "image"
