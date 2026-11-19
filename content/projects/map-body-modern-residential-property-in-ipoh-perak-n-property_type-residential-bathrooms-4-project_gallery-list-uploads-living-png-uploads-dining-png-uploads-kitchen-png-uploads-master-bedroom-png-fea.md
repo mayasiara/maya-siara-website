@@ -6,12 +6,12 @@ property_type: Residential
 bedrooms: 4
 bathrooms: 4
 description: Modern residential property in Ipoh, Perak.
-main_project_image: /uploads/2-storey-terrace-new-2.jpg
+main_project_image: /maya-siara-website/uploads/2-storey-terrace-new-2.jpg
 project_gallery:
-  - /uploads/living.png
-  - /uploads/dining.png
-  - /uploads/kitchen.png
-  - /uploads/master-bedroom.png
+  - /maya-siara-website/uploads/Living.png
+  - /maya-siara-website/uploads/Dining.png
+  - /maya-siara-website/uploads/Kitchen.png
+  - /maya-siara-website/uploads/Master Bedroom.png
 featured: true
 status: Ongoing
 title: Sample Property
