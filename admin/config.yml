@@ -4,8 +4,8 @@ backend:
   turbo_site_id: 33b6616f-d47c-4179-a3bc-e727cc91e067
   branch: main
 
-media_folder: "public/uploads"
-public_folder: "/uploads"
+media_folder: "uploads"
+public_folder: "/maya-siara-website/uploads"
 
 collections:
   - name: "projects"
