@@ -48,20 +48,62 @@ const html=(id,value)=>{if(value!==undefined&&value!==null&&String(value).trim()
 const asset=p=>{if(!p)return '';if(/^https?:\/\//i.test(p))return p;if(p.startsWith('/'))return p;return '/maya-siara-website/'+p.replace(/^\.?\//,'')};
 async function getYaml(path){try{const r=await fetch(RAW+path,{cache:'no-store'});if(!r.ok)return {};return jsyaml.load(await r.text())||{}}catch(e){console.warn('Could not load',path,e);return {}}}
 function setImage(id,wrapId,path,alt){const img=$(id);if(path){img.src=asset(path);img.alt=alt||'';img.classList.remove('hidden');if(wrapId)$(wrapId).classList.remove('hidden')}else{img.classList.add('hidden');if(wrapId)$(wrapId).classList.add('hidden')}}
-function applyDesign(d={}){const root=document.documentElement.style;const fonts={'DM Sans':"'DM Sans',sans-serif",'Playfair Display':"'Playfair Display',serif",'Montserrat':"'Montserrat',sans-serif",'Lato':"'Lato',sans-serif",'Roboto':"'Roboto',sans-serif"};root.setProperty('--heading',fonts[d.heading_font]||fonts['Playfair Display']);root.setProperty('--body',fonts[d.body_font]||fonts['DM Sans']);[['--ink','text_color'],['--muted','muted_color'],['--paper','background_color'],['--accent','accent_color'],['--line','line_color']].forEach(([v,k])=>{if(d[k])root.setProperty(v,d[k])});if(d.content_width)root.setProperty('--content-width',d.content_width+'px');if(d.hero_height)root.setProperty('--hero-height',d.hero_height+'px');if(d.property_image_height)root.setProperty('--property-height',d.property_image_height+'px');if(d.gallery_image_height)root.setProperty('--gallery-height',d.gallery_image_height+'px');if(d.heading_size)document.querySelectorAll('.hero h1').forEach(e=>e.style.fontSize=d.heading_size+'px');if(d.body_size)document.body.style.fontSize=d.body_size+'px';if(d.button_color)document.querySelectorAll('.btn').forEach(e=>e.style.background=d.button_color);if(d.button_text_color)document.querySelectorAll('.btn').forEach(e=>e.style.color=d.button_text_color)}
+function applyDesign(d={}, t={}, layout={}){
+  const root=document.documentElement.style;
+  const fonts={'DM Sans':"'DM Sans',sans-serif",'Playfair Display':"'Playfair Display',serif",'Montserrat':"'Montserrat',sans-serif",'Lato':"'Lato',sans-serif",'Roboto':"'Roboto',sans-serif"};
+  const headingFont=t.heading_font||t.heading||d.heading_font||d.heading||'Playfair Display';
+  const bodyFont=t.body_font||t.body||d.body_font||d.body||'DM Sans';
+  root.setProperty('--heading',fonts[headingFont]||headingFont);
+  root.setProperty('--body',fonts[bodyFont]||bodyFont);
+  const colorFields=[['--ink','text_color'],['--muted','muted_color'],['--paper','background_color'],['--accent','accent_color'],['--line','line_color']];
+  colorFields.forEach(([css,key])=>{const value=d[key]||d[key.replace('_color','')]||layout[key];if(value)root.setProperty(css,value)});
+  const setPx=(css,...values)=>{const value=values.find(v=>v!==undefined&&v!==null&&v!=='');if(value!==undefined)root.setProperty(css,typeof value==='number'?value+'px':value)};
+  setPx('--content-width',layout.content_width,d.content_width);
+  setPx('--hero-height',layout.hero_height,d.hero_height);
+  setPx('--property-height',layout.property_image_height,layout.property_height,d.property_image_height);
+  setPx('--gallery-height',layout.gallery_image_height,layout.gallery_height,d.gallery_image_height);
+  const headingSize=t.heading_size||t.heading_font_size||d.heading_size;
+  const bodySize=t.body_size||t.body_font_size||d.body_size;
+  const navSize=t.navigation_size||t.nav_size;
+  const buttonSize=t.button_size;
+  if(headingSize)document.querySelectorAll('.hero h1').forEach(e=>e.style.fontSize=Number(headingSize)+'px');
+  if(bodySize)document.body.style.fontSize=Number(bodySize)+'px';
+  if(navSize)document.querySelectorAll('.nav').forEach(e=>e.style.fontSize=Number(navSize)+'px');
+  if(buttonSize)document.querySelectorAll('.btn').forEach(e=>e.style.fontSize=Number(buttonSize)+'px');
+  if(d.button_color)document.querySelectorAll('.btn').forEach(e=>e.style.background=d.button_color);
+  if(d.button_text_color)document.querySelectorAll('.btn').forEach(e=>e.style.color=d.button_text_color);
+  const fit=layout.image_fit||layout.hero_image_fit||d.image_fit;
+  if(fit)document.querySelectorAll('.heroimg img,.project img,.gallery img,.aboutphoto img').forEach(e=>e.style.objectFit=fit);
+  if(layout.gallery_columns||d.gallery_columns){const n=Math.max(1,Math.min(4,Number(layout.gallery_columns||d.gallery_columns)));$('galleryList').style.gridTemplateColumns=`repeat(${n},minmax(0,1fr))`;}
+}
 function addContact(label,value,href){if(!value)return;const div=document.createElement('div');const small=document.createElement('small');small.textContent=label;const strong=document.createElement('strong');if(href){const a=document.createElement('a');a.href=href;a.textContent=value;if(href.startsWith('http')){a.target='_blank';a.rel='noopener'}strong.append(a)}else strong.textContent=value;div.append(small,strong);$('contactLinks').append(div)}
 async function listMarkdown(folder){try{const r=await fetch(API+folder+'?ref='+BRANCH,{headers:{'Accept':'application/vnd.github+json'}});if(!r.ok)return [];const files=await r.json();return await Promise.all(files.filter(f=>f.type==='file'&&f.name.endsWith('.md')).map(async f=>{try{const rr=await fetch(f.download_url);const s=await rr.text();const m=s.match(/^---\s*\n([\s\S]*?)\n---\s*\n?([\s\S]*)$/);return m?{...jsyaml.load(m[1]),body:m[2]}:{}}catch(e){return {}}}))}catch(e){console.warn('Could not list',folder,e);return []}}
 function renderProjects(items){const list=$('projectList');list.replaceChildren();const visible=items.filter(p=>p.project_name||p.title);visible.sort((a,b)=>(a.featured===b.featured?0:a.featured?-1:1));visible.forEach(p=>{const article=document.createElement('article');article.className='project';const image=p.main_project_image||p.image;if(image){const img=document.createElement('img');img.src=asset(image);img.alt=p.project_name||p.title||'Property';article.append(img)}const info=document.createElement('div');info.className='projectinfo';const small=document.createElement('small');small.textContent=[p.property_type,p.project_status].filter(Boolean).join(' · ');const h=document.createElement('h3');h.textContent=p.project_name||p.title||'Property';const para=document.createElement('p');para.textContent=[p.location,p.price,p.built_up_area,p.land_area,p.bedrooms?`${p.bedrooms} bedrooms`:null,p.bathrooms?`${p.bathrooms} bathrooms`:null,p.tenure].filter(Boolean).join(' · ');info.append(small,h,para);if(p.description){const desc=document.createElement('p');desc.textContent=String(p.description).replace(/[#*_`>]/g,'').slice(0,260);info.append(desc)}if(Array.isArray(p.project_gallery)&&p.project_gallery.length){const thumbs=document.createElement('div');thumbs.style.cssText='display:flex;gap:8px;flex-wrap:wrap;margin-top:14px';p.project_gallery.slice(0,4).forEach(g=>{const src=typeof g==='string'?g:g.image;if(!src)return;const im=document.createElement('img');im.src=asset(src);im.alt=p.project_name||'Project gallery';im.loading='lazy';im.style.cssText='width:72px;height:58px;object-fit:cover';thumbs.append(im)});info.append(thumbs)}article.append(info);list.append(article)});$('projectsEmpty').classList.toggle('hidden',visible.length>0);$('projects').classList.toggle('hidden',visible.length===0)}
-function renderGallery(items){const list=$('galleryList');list.replaceChildren();items.sort((a,b)=>(Number(a.order)||999)-(Number(b.order)||999)).forEach(item=>{const src=item.image||item.gallery_image;if(!src)return;const fig=document.createElement('figure');const img=document.createElement('img');img.loading='lazy';img.src=asset(src);img.alt=item.caption||'MAYA SIARA gallery';fig.append(img);if(item.caption){const cap=document.createElement('figcaption');cap.textContent=item.caption;fig.append(cap)}list.append(fig)});$('gallery').classList.toggle('hidden',items.length===0)}
-async function init(){const [company,home,about,design,layout,projects,gallery]=await Promise.all([getYaml('content/settings/company.yml'),getYaml('content/settings/homepage.yml'),getYaml('content/settings/about.yml'),getYaml('content/settings/design.yml'),getYaml('content/settings/image-layout.yml'),listMarkdown('content/projects'),listMarkdown('content/gallery')]);
-applyDesign({...design,...layout});
-const name=company.company_name||'MAYA SIARA';text('companyName',name);text('companySubline',company.company_subline||'SDN. BHD. · PROPERTY DEVELOPER');text('footerCompany',company.legal_name||name);text('footerTagline',company.footer_tagline||'Property Developer · Malaysia');text('footerCopyright',company.copyright_text||'All rights reserved.');text('year',new Date().getFullYear());
+function renderGallery(items){const list=$('galleryList');list.replaceChildren();[...items].sort((a,b)=>(Number(a.order)||999)-(Number(b.order)||999)).forEach(item=>{const src=typeof item==='string'?item:(item.image||item.gallery_image||item.photo);if(!src)return;const fig=document.createElement('figure');const img=document.createElement('img');img.loading='lazy';img.src=asset(src);img.alt=item.caption||'MAYA SIARA gallery';fig.append(img);if(item.caption){const cap=document.createElement('figcaption');cap.textContent=item.caption;fig.append(cap)}list.append(fig)});$('gallery').classList.toggle('hidden',items.length===0)}
+async function init(){
+  const [company,home,about,design,typography,layout,gallerySettings,projects,galleryFiles]=await Promise.all([
+    getYaml('content/settings/company.yml'),
+    getYaml('content/settings/homepage.yml'),
+    getYaml('content/settings/about.yml'),
+    getYaml('content/settings/design.yml'),
+    getYaml('content/settings/typography.yml'),
+    getYaml('content/settings/image-layout.yml'),
+    getYaml('content/settings/gallery.yml'),
+    listMarkdown('content/projects'),
+    listMarkdown('content/gallery')
+  ]);
+  applyDesign(design,typography,layout);
+const name=company.company_name||company.name||'MAYA SIARA';text('companyName',name);text('companySubline',company.company_subline||'SDN. BHD. · PROPERTY DEVELOPER');text('footerCompany',company.legal_name||name);text('footerTagline',company.footer_tagline||'Property Developer · Malaysia');text('footerCopyright',company.copyright_text||'All rights reserved.');text('year',new Date().getFullYear());
 if(company.logo){$('brandLogo').src=asset(company.logo);$('brandLogo').classList.remove('hidden');$('brandMark').classList.add('hidden')}
 const nav=home.navigation||{};[['navHome','home_label','Home'],['navAbout','about_label','About Us'],['navProjects','projects_label','Projects'],['navGallery','gallery_label','Gallery'],['navContact','contact_label','Contact']].forEach(([id,key,def])=>text(id,nav[key]||def));
-text('heroEyebrow',home.eyebrow);html('heroTitle',home.title_html);text('heroText',home.description);text('heroButtonText',home.button_text);if(home.button_link)$('heroButton').href=home.button_link;text('heroImageNote',home.image_caption);setImage('heroImage','heroImageWrap',home.banner_image,'Homepage banner');
-text('aboutEyebrow',about.eyebrow);text('aboutTitle',about.title);const aboutBody=about.paragraphs||[];$('aboutText').replaceChildren();aboutBody.forEach(p=>{const el=document.createElement('p');el.textContent=p;$('aboutText').append(el)});setImage('aboutImage','aboutImageWrap',about.image,'About MAYA SIARA');$('about').classList.toggle('hidden',!about.title&&!about.image&&!aboutBody.length);
+text('heroEyebrow',home.eyebrow||home.hero_eyebrow);html('heroTitle',home.title_html||home.title);text('heroText',home.description||home.hero_description);text('heroButtonText',home.button_text);if(home.button_link)$('heroButton').href=home.button_link;text('heroImageNote',home.image_caption);setImage('heroImage','heroImageWrap',home.banner_image||home.hero_image,'Homepage banner');
+text('aboutEyebrow',about.eyebrow||about.section_eyebrow);text('aboutTitle',about.title||about.heading);const aboutBody=about.paragraphs||about.content||[];$('aboutText').replaceChildren();aboutBody.forEach(p=>{const el=document.createElement('p');el.textContent=p;$('aboutText').append(el)});setImage('aboutImage','aboutImageWrap',about.image,'About MAYA SIARA');$('about').classList.toggle('hidden',!about.title&&!about.image&&!aboutBody.length);
 text('projectsEyebrow',home.projects_eyebrow);text('projectsTitle',home.projects_title||'Our Projects');text('projectsIntro',home.projects_intro);renderProjects(projects);
-text('galleryEyebrow',home.gallery_eyebrow);text('galleryTitle',home.gallery_title||'Gallery');text('galleryIntro',home.gallery_intro);renderGallery(gallery);
+  text('galleryEyebrow',gallerySettings.eyebrow||home.gallery_eyebrow);
+  text('galleryTitle',gallerySettings.title||home.gallery_title||'Gallery');
+  text('galleryIntro',gallerySettings.description||home.gallery_intro);
+  const galleryItems=gallerySettings.images||gallerySettings.gallery_images||gallerySettings.items||galleryFiles;
+  renderGallery(Array.isArray(galleryItems)?galleryItems:[]);
 text('contactEyebrow',company.contact_eyebrow);text('contactTitle',company.contact_title);text('contactIntro',company.contact_intro);$('contactLinks').replaceChildren();addContact('Phone',company.phone,company.phone?`tel:${company.phone.replace(/[^+\d]/g,'')}`:null);addContact('Email',company.email,company.email?`mailto:${company.email}`:null);addContact('WhatsApp',company.whatsapp,company.whatsapp?`https://wa.me/${company.whatsapp.replace(/\D/g,'')}`:null);addContact('Office',company.address,company.google_maps_url||null);if(company.facebook)addContact('Facebook','Visit Facebook',company.facebook);if(company.instagram)addContact('Instagram','Visit Instagram',company.instagram);
 if(home.show_projects===false)$('projects').classList.add('hidden');if(home.show_gallery===false)$('gallery').classList.add('hidden');
 }
