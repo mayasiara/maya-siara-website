@@ -10,37 +10,100 @@ public_folder: "/uploads"
 collections:
   - name: "projects"
     label: "Property Projects"
-    label_singular: "Property Project"
+    label_singular: "Property"
     folder: "content/projects"
     create: true
+    extension: "md"
+    format: "frontmatter"
     slug: "{{slug}}"
+
     fields:
       - label: "Project Name"
-        name: "title"
+        name: "project_name"
         widget: "string"
+
       - label: "Location"
         name: "location"
         widget: "string"
+
       - label: "Project Status"
-        name: "status"
+        name: "project_status"
         widget: "select"
         options:
-          - "Upcoming"
+          - "For Sale"
+          - "For Rent"
+          - "Sold"
+          - "Rented"
           - "Ongoing"
           - "Completed"
+
       - label: "Property Type"
         name: "property_type"
+        widget: "select"
+        options:
+          - "Residential"
+          - "Commercial"
+          - "Industrial"
+          - "Land"
+          - "Agriculture"
+          - "Mixed Development"
+          - "New Development"
+          - "Other"
+
+      - label: "Price"
+        name: "price"
         widget: "string"
+        required: false
+
+      - label: "Bedrooms"
+        name: "bedrooms"
+        widget: "number"
+        required: false
+        value_type: "int"
+        min: 0
+
+      - label: "Bathrooms"
+        name: "bathrooms"
+        widget: "number"
+        required: false
+        value_type: "int"
+        min: 0
+
+      - label: "Built-up Area"
+        name: "built_up_area"
+        widget: "string"
+        required: false
+
+      - label: "Land Area"
+        name: "land_area"
+        widget: "string"
+        required: false
+
+      - label: "Tenure"
+        name: "tenure"
+        widget: "string"
+        required: false
+
       - label: "Description"
-        name: "body"
+        name: "description"
         widget: "markdown"
+        required: false
+
       - label: "Main Project Image"
-        name: "image"
+        name: "main_project_image"
         widget: "image"
+        required: false
+
       - label: "Project Gallery"
-        name: "gallery"
+        name: "project_gallery"
         widget: "list"
+        required: false
         field:
           label: "Image"
           name: "image"
           widget: "image"
+
+      - label: "Featured Property"
+        name: "featured"
+        widget: "boolean"
+        default: false
