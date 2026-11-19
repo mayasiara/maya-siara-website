@@ -8,15 +8,230 @@ media_folder: "uploads"
 public_folder: "/maya-siara-website/uploads"
 
 collections:
+
+  # 1. COMPANY PROFILE
+  - name: "company"
+    label: "1. Company Profile"
+    files:
+      - name: "company_info"
+        label: "Company Information"
+        file: "content/settings/company.yml"
+        format: "yaml"
+        fields:
+          - label: "Company Name"
+            name: "company_name"
+            widget: "string"
+          - label: "Company Logo"
+            name: "logo"
+            widget: "image"
+            required: false
+          - label: "Tagline"
+            name: "tagline"
+            widget: "string"
+            required: false
+          - label: "Phone"
+            name: "phone"
+            widget: "string"
+            required: false
+          - label: "Email"
+            name: "email"
+            widget: "string"
+            required: false
+          - label: "WhatsApp"
+            name: "whatsapp"
+            widget: "string"
+            required: false
+          - label: "Office Address"
+            name: "address"
+            widget: "text"
+            required: false
+          - label: "Facebook"
+            name: "facebook"
+            widget: "string"
+            required: false
+          - label: "Instagram"
+            name: "instagram"
+            widget: "string"
+            required: false
+
+  # 2. HOMEPAGE
+  - name: "homepage"
+    label: "2. Homepage"
+    files:
+      - name: "home_content"
+        label: "Homepage Content"
+        file: "content/settings/homepage.yml"
+        format: "yaml"
+        fields:
+          - label: "Small Heading"
+            name: "eyebrow"
+            widget: "string"
+          - label: "Main Heading"
+            name: "heading"
+            widget: "string"
+          - label: "Introduction"
+            name: "intro"
+            widget: "markdown"
+          - label: "Main Button Text"
+            name: "button_text"
+            widget: "string"
+            required: false
+          - label: "Main Button Link"
+            name: "button_link"
+            widget: "string"
+            required: false
+          - label: "Main Image"
+            name: "hero_image"
+            widget: "image"
+            required: false
+
+  # 3. ABOUT US
+  - name: "about"
+    label: "3. About Us"
+    files:
+      - name: "about_content"
+        label: "About Us Content"
+        file: "content/settings/about.yml"
+        format: "yaml"
+        fields:
+          - label: "Small Heading"
+            name: "eyebrow"
+            widget: "string"
+          - label: "Main Heading"
+            name: "heading"
+            widget: "string"
+          - label: "Company Introduction"
+            name: "description"
+            widget: "markdown"
+          - label: "About Image"
+            name: "image"
+            widget: "image"
+            required: false
+
+  # 4. TYPOGRAPHY
+  - name: "typography"
+    label: "4. Typography & Fonts"
+    files:
+      - name: "font_settings"
+        label: "Website Font Settings"
+        file: "content/settings/typography.yml"
+        format: "yaml"
+        fields:
+          - label: "Main Font"
+            name: "main_font"
+            widget: "select"
+            options:
+              - "Arial"
+              - "Roboto"
+              - "Open Sans"
+              - "Lato"
+              - "Montserrat"
+              - "Poppins"
+              - "Inter"
+              - "Playfair Display"
+              - "Cormorant Garamond"
+              - "DM Sans"
+          - label: "Heading Font"
+            name: "heading_font"
+            widget: "select"
+            options:
+              - "Arial"
+              - "Roboto"
+              - "Montserrat"
+              - "Poppins"
+              - "Inter"
+              - "Playfair Display"
+              - "Cormorant Garamond"
+              - "DM Sans"
+          - label: "Body Font Size"
+            name: "body_size"
+            widget: "number"
+            value_type: "int"
+            default: 14
+            min: 10
+            max: 24
+          - label: "Heading Font Size"
+            name: "heading_size"
+            widget: "number"
+            value_type: "int"
+            default: 48
+            min: 20
+            max: 100
+          - label: "Font Weight"
+            name: "font_weight"
+            widget: "select"
+            options:
+              - "300"
+              - "400"
+              - "500"
+              - "600"
+              - "700"
+
+  # 5. COLORS & DESIGN
+  - name: "design"
+    label: "5. Colors & Design"
+    files:
+      - name: "design_settings"
+        label: "Website Design Settings"
+        file: "content/settings/design.yml"
+        format: "yaml"
+        fields:
+          - label: "Background Color"
+            name: "background_color"
+            widget: "color"
+            default: "#F7F5EF"
+          - label: "Main Text Color"
+            name: "text_color"
+            widget: "color"
+            default: "#252520"
+          - label: "Accent Color"
+            name: "accent_color"
+            widget: "color"
+            default: "#B89B70"
+          - label: "Secondary Background"
+            name: "secondary_color"
+            widget: "color"
+            default: "#EAE7DF"
+          - label: "Button Background"
+            name: "button_color"
+            widget: "color"
+            default: "#252520"
+          - label: "Button Text Color"
+            name: "button_text_color"
+            widget: "color"
+            default: "#FFFFFF"
+
+  # 6. GALLERY
+  - name: "gallery"
+    label: "6. Website Gallery"
+    files:
+      - name: "gallery_images"
+        label: "Gallery Images"
+        file: "content/settings/gallery.yml"
+        format: "yaml"
+        fields:
+          - label: "Gallery Images"
+            name: "images"
+            widget: "list"
+            required: false
+            fields:
+              - label: "Image"
+                name: "image"
+                widget: "image"
+              - label: "Image Description"
+                name: "alt"
+                widget: "string"
+                required: false
+
+  # 7. PROPERTY PROJECTS
   - name: "projects"
-    label: "Property Projects"
+    label: "7. Property Projects"
     label_singular: "Property"
     folder: "content/projects"
     create: true
     extension: "md"
     format: "frontmatter"
     slug: "{{slug}}"
-
     fields:
       - label: "Project Name"
         name: "project_name"
