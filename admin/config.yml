@@ -106,4 +106,5 @@ collections:
       - label: "Featured Property"
         name: "featured"
         widget: "boolean"
+        required: false
         default: false
