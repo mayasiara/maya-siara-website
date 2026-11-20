@@ -21,6 +21,58 @@ collections:
           - label: "Company Name"
             name: "company_name"
             widget: "string"
+          - label: "Company Subline"
+            name: "company_subline"
+            widget: "string"
+            required: false
+          - label: "Legal Company Name"
+            name: "legal_name"
+            widget: "string"
+            required: false
+          - label: "Footer Tagline"
+            name: "footer_tagline"
+            widget: "string"
+            required: false
+          - label: "Footer Copyright Text"
+            name: "copyright_text"
+            widget: "string"
+            required: false
+          - label: "Contact Section Small Heading"
+            name: "contact_eyebrow"
+            widget: "string"
+            required: false
+          - label: "Contact Section Main Heading"
+            name: "contact_title"
+            widget: "text"
+            required: false
+          - label: "Contact Section Introduction"
+            name: "contact_intro"
+            widget: "text"
+            required: false
+          - label: "Phone Label"
+            name: "phone_label"
+            widget: "string"
+            default: "Phone"
+          - label: "Email Label"
+            name: "email_label"
+            widget: "string"
+            default: "Email"
+          - label: "WhatsApp Label"
+            name: "whatsapp_label"
+            widget: "string"
+            default: "WhatsApp"
+          - label: "Office Address Label"
+            name: "address_label"
+            widget: "string"
+            default: "Office"
+          - label: "Facebook Link Label"
+            name: "facebook_label"
+            widget: "string"
+            default: "Visit Facebook"
+          - label: "Instagram Link Label"
+            name: "instagram_label"
+            widget: "string"
+            default: "Visit Instagram"
           - label: "Company Logo"
             name: "logo"
             widget: "image"
@@ -63,15 +115,74 @@ collections:
         file: "content/settings/homepage.yml"
         format: "yaml"
         fields:
-          - label: "Small Heading"
+          - label: "Small Heading (Hero)"
             name: "eyebrow"
             widget: "string"
-          - label: "Main Heading"
-            name: "heading"
-            widget: "string"
+            required: false
+          - label: "Main Heading (use a new line where needed)"
+            name: "title"
+            widget: "text"
+            required: false
           - label: "Introduction"
-            name: "intro"
-            widget: "markdown"
+            name: "description"
+            widget: "text"
+            required: false
+          - label: "Hero Image Caption"
+            name: "image_caption"
+            widget: "string"
+            required: false
+          - label: "Projects Small Heading"
+            name: "projects_eyebrow"
+            widget: "string"
+            required: false
+          - label: "Projects Section Title"
+            name: "projects_title"
+            widget: "string"
+            required: false
+          - label: "Projects Section Introduction"
+            name: "projects_intro"
+            widget: "text"
+            required: false
+          - label: "Gallery Small Heading"
+            name: "gallery_eyebrow"
+            widget: "string"
+            required: false
+          - label: "Gallery Section Title"
+            name: "gallery_title"
+            widget: "string"
+            required: false
+          - label: "Gallery Section Introduction"
+            name: "gallery_intro"
+            widget: "text"
+            required: false
+          - label: "Show Projects Section"
+            name: "show_projects"
+            widget: "boolean"
+            default: true
+          - label: "Show Gallery Section"
+            name: "show_gallery"
+            widget: "boolean"
+            default: true
+          - label: "Navigation - Home"
+            name: "navigation.home_label"
+            widget: "string"
+            default: "Home"
+          - label: "Navigation - About Us"
+            name: "navigation.about_label"
+            widget: "string"
+            default: "About Us"
+          - label: "Navigation - Projects"
+            name: "navigation.projects_label"
+            widget: "string"
+            default: "Projects"
+          - label: "Navigation - Gallery"
+            name: "navigation.gallery_label"
+            widget: "string"
+            default: "Gallery"
+          - label: "Navigation - Contact"
+            name: "navigation.contact_label"
+            widget: "string"
+            default: "Contact"
           - label: "Main Button Text"
             name: "button_text"
             widget: "string"
@@ -98,11 +209,17 @@ collections:
             name: "eyebrow"
             widget: "string"
           - label: "Main Heading"
-            name: "heading"
-            widget: "string"
+            name: "title"
+            widget: "text"
+            required: false
           - label: "Company Introduction"
-            name: "description"
-            widget: "markdown"
+            name: "paragraphs"
+            widget: "list"
+            required: false
+            field:
+              label: "Paragraph"
+              name: "paragraph"
+              widget: "text"
           - label: "About Image"
             name: "image"
             widget: "image"
@@ -223,7 +340,46 @@ collections:
                 widget: "string"
                 required: false
 
-  # 7. PROPERTY PROJECTS
+
+  # 7. IMAGE SIZE & LAYOUT
+  - name: "image_layout"
+    label: "7. Image Size & Layout"
+    files:
+      - name: "image_layout_settings"
+        label: "Website Image Layout"
+        file: "content/settings/image-layout.yml"
+        format: "yaml"
+        fields:
+          - label: "Property Main Photo Height (px)"
+            name: "property_image_height"
+            widget: "number"
+            value_type: "int"
+            default: 420
+            min: 250
+            max: 700
+          - label: "Property Photo Fit"
+            name: "image_fit"
+            widget: "select"
+            options:
+              - "cover"
+              - "contain"
+            default: "cover"
+          - label: "Hero Image Height (px)"
+            name: "hero_height"
+            widget: "number"
+            value_type: "int"
+            default: 470
+            min: 200
+            max: 800
+          - label: "Gallery Image Height (px)"
+            name: "gallery_image_height"
+            widget: "number"
+            value_type: "int"
+            default: 230
+            min: 100
+            max: 600
+
+  # 8. PROPERTY PROJECTS
   - name: "projects"
     label: "7. Property Projects"
     label_singular: "Property"
@@ -313,10 +469,10 @@ collections:
         name: "project_gallery"
         widget: "list"
         required: false
-        field:
-          label: "Image"
-          name: "image"
-          widget: "image"
+        fields:
+          - label: "Image"
+            name: "image"
+            widget: "image"
 
       - label: "Featured Property"
         name: "featured"
