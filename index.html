@@ -123,62 +123,85 @@ if(home.show_projects===false)$('projects').classList.add('hidden');if(home.show
 init();
 document.querySelectorAll('.nav a').forEach(a=>a.addEventListener('click',()=>$('nav').classList.remove('open')));
 
-// Click any main property, gallery, or property-gallery thumbnail to open the photo viewer.
+// Reliable photo viewer: create the overlay after the page markup exists.
 (function(){
-  const box=document.getElementById('photoLightbox');
-  const view=document.getElementById('lightboxImage');
-  const count=document.getElementById('lightboxCount');
-  if(!box||!view)return;
-  let photos=[],index=0;
-  function collect(){
-    return [...document.querySelectorAll('#projectList .project > img, #projectList .projectinfo img, #galleryList img')]
-      .filter(im=>im.src && im.offsetParent!==null);
+  function setupPhotoViewer(){
+    let box=document.getElementById('photoLightbox');
+    if(!box){
+      box=document.createElement('div');
+      box.id='photoLightbox';
+      box.className='lightbox';
+      box.setAttribute('aria-hidden','true');
+      box.setAttribute('role','dialog');
+      box.setAttribute('aria-label','Photo viewer');
+      box.innerHTML='<button class="lightbox-close" id="lightboxClose" aria-label="Close photo viewer">×</button><button class="lightbox-prev" id="lightboxPrev" aria-label="Previous photo">‹</button><img id="lightboxImage" alt=""><button class="lightbox-next" id="lightboxNext" aria-label="Next photo">›</button><div class="lightbox-count" id="lightboxCount"></div>';
+      document.body.appendChild(box);
+    }
+    const view=box.querySelector('#lightboxImage');
+    const count=box.querySelector('#lightboxCount');
+    const closeBtn=box.querySelector('#lightboxClose');
+    const prevBtn=box.querySelector('#lightboxPrev');
+    const nextBtn=box.querySelector('#lightboxNext');
+    let photos=[],index=0,touchStartX=0;
+    const selector='.project img,.gallery img,.heroimg img,.aboutphoto img';
+    function collect(){
+      return [...document.querySelectorAll(selector)].filter(im=>{
+        return im.getAttribute('src') && im.getClientRects().length>0 && !im.classList.contains('hidden');
+      });
+    }
+    function show(i){
+      if(!photos.length)return;
+      index=(i+photos.length)%photos.length;
+      view.src=photos[index].currentSrc||photos[index].src;
+      view.alt=photos[index].alt||'MAYA SIARA photo';
+      count.textContent=(index+1)+' / '+photos.length;
+      const multiple=photos.length>1;
+      prevBtn.style.display=multiple?'flex':'none';
+      nextBtn.style.display=multiple?'flex':'none';
+    }
+    function open(img){
+      photos=collect();
+      index=photos.indexOf(img);
+      if(index<0){photos=[img];index=0;}
+      show(index);
+      box.classList.add('open');
+      box.setAttribute('aria-hidden','false');
+      document.body.style.overflow='hidden';
+    }
+    function close(){
+      box.classList.remove('open');
+      box.setAttribute('aria-hidden','true');
+      document.body.style.overflow='';
+    }
+    document.addEventListener('click',function(e){
+      const img=e.target.closest(selector);
+      if(img && img.getAttribute('src') && !img.classList.contains('hidden')){
+        e.preventDefault();
+        open(img);
+      }
+    });
+    closeBtn.addEventListener('click',close);
+    prevBtn.addEventListener('click',()=>show(index-1));
+    nextBtn.addEventListener('click',()=>show(index+1));
+    box.addEventListener('click',e=>{if(e.target===box)close();});
+    document.addEventListener('keydown',e=>{
+      if(!box.classList.contains('open'))return;
+      if(e.key==='Escape')close();
+      if(e.key==='ArrowLeft')show(index-1);
+      if(e.key==='ArrowRight')show(index+1);
+    });
+    box.addEventListener('touchstart',e=>{touchStartX=e.changedTouches[0].screenX;},{passive:true});
+    box.addEventListener('touchend',e=>{
+      const dx=e.changedTouches[0].screenX-touchStartX;
+      if(Math.abs(dx)>45)show(index+(dx<0?1:-1));
+    },{passive:true});
   }
-  function show(i){
-    if(!photos.length)return;
-    index=(i+photos.length)%photos.length;
-    view.src=photos[index].currentSrc||photos[index].src;
-    view.alt=photos[index].alt||'MAYA SIARA photo';
-    count.textContent=(index+1)+' / '+photos.length;
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',setupPhotoViewer,{once:true});
+  }else{
+    setupPhotoViewer();
   }
-  function open(img){
-    photos=collect();
-    const clicked=photos.indexOf(img);
-    if(clicked<0){photos=[img];index=0;}else{index=clicked;}
-    show(index);
-    box.classList.add('open');
-    box.setAttribute('aria-hidden','false');
-    document.body.style.overflow='hidden';
-  }
-  function close(){
-    box.classList.remove('open');
-    box.setAttribute('aria-hidden','true');
-    document.body.style.overflow='';
-  }
-  document.addEventListener('click',e=>{
-    const img=e.target.closest('#projectList .project > img, #projectList .projectinfo img, #galleryList img');
-    if(img){open(img);}
-  });
-  document.getElementById('lightboxClose').addEventListener('click',close);
-  document.getElementById('lightboxPrev').addEventListener('click',()=>show(index-1));
-  document.getElementById('lightboxNext').addEventListener('click',()=>show(index+1));
-  box.addEventListener('click',e=>{if(e.target===box)close();});
-  document.addEventListener('keydown',e=>{
-    if(!box.classList.contains('open'))return;
-    if(e.key==='Escape')close();
-    if(e.key==='ArrowLeft')show(index-1);
-    if(e.key==='ArrowRight')show(index+1);
-  });
 })();
-
 </script>
-
-<div class="lightbox" id="photoLightbox" aria-hidden="true" role="dialog" aria-label="Photo viewer">
-  <button class="lightbox-close" id="lightboxClose" aria-label="Close photo viewer">×</button>
-  <button class="lightbox-prev" id="lightboxPrev" aria-label="Previous photo">‹</button>
-  <img id="lightboxImage" alt="">
-  <button class="lightbox-next" id="lightboxNext" aria-label="Next photo">›</button>
-  <div class="lightbox-count" id="lightboxCount"></div>
-</div>
 
 </body></html>
