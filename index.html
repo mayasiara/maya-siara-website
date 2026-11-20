@@ -18,6 +18,19 @@
 .contact{background:#242722;color:#fff;padding:85px 0}.contact .eyebrow{color:#c8b18b}.contact h2{white-space:pre-line;font-size:clamp(38px,5vw,56px)}.contact p{color:#c4c5be;line-height:1.8;font-size:13px}.contactgrid{display:grid;grid-template-columns:1fr 1fr;gap:60px}.contactlinks{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-content:center}.contactlinks small{display:block;color:#aaa99f;font-size:9px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:9px}.contactlinks strong{font-size:13px;font-weight:500}.contactlinks a:hover{color:#d8c9ad}.footer{padding:25px 0;color:#a9aaa3;font-size:10px;display:flex;justify-content:space-between;gap:20px}.footer b{color:#fff;font-weight:500}
 .hidden{display:none!important}
 @media(max-width:760px){.wrap{width:min(100% - 34px,600px)}.topbar{min-height:70px}.nav{display:none;position:absolute;top:70px;left:0;right:0;background:var(--paper);padding:25px;z-index:5;flex-direction:column;gap:20px;border-bottom:1px solid var(--line)}.nav.open{display:flex}.menu{display:block}.hero{grid-template-columns:1fr;gap:28px;padding:52px 0;min-height:0}.heroimg{height:min(var(--hero-height),360px)}.section{padding:65px 0}.sectionhead{display:block}.sectionhead p{margin-top:20px}.aboutgrid,.contactgrid{grid-template-columns:1fr;gap:30px}.aboutphoto{height:290px}.projects{grid-template-columns:1fr}.project img{height:min(var(--property-height),360px)}.gallery{grid-template-columns:1fr 1fr}.gallery figure:first-child{height:auto;grid-row:auto;grid-column:span 2}.gallery figure:first-child img{height:230px}.gallery img{height:180px}.contactlinks{gap:20px}.footer{flex-direction:column}}
+
+/* Photo lightbox: click to enlarge and browse images */
+.lightbox{position:fixed;inset:0;z-index:9999;background:rgba(10,10,10,.94);display:none;align-items:center;justify-content:center;padding:56px 72px;box-sizing:border-box}
+.lightbox.open{display:flex}
+.lightbox img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;box-shadow:0 12px 50px rgba(0,0,0,.35)}
+.lightbox button{position:absolute;border:0;background:rgba(255,255,255,.14);color:#fff;cursor:pointer;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.lightbox-close{top:18px;right:22px;width:44px;height:44px;font-size:30px}
+.lightbox-prev,.lightbox-next{top:50%;transform:translateY(-50%);width:48px;height:48px;font-size:30px}
+.lightbox-prev{left:16px}.lightbox-next{right:16px}
+.lightbox-count{position:absolute;bottom:18px;left:0;right:0;text-align:center;color:#fff;font:13px var(--body);letter-spacing:.08em}
+.project img,.gallery img,.project img[role],.projectinfo img{cursor:zoom-in}
+@media(max-width:600px){.lightbox{padding:55px 48px}.lightbox-prev{left:5px}.lightbox-next{right:5px}.lightbox-prev,.lightbox-next{width:38px;height:38px}}
+
 </style>
 </head>
 <body>
@@ -109,5 +122,63 @@ if(home.show_projects===false)$('projects').classList.add('hidden');if(home.show
 }
 init();
 document.querySelectorAll('.nav a').forEach(a=>a.addEventListener('click',()=>$('nav').classList.remove('open')));
+
+// Click any main property, gallery, or property-gallery thumbnail to open the photo viewer.
+(function(){
+  const box=document.getElementById('photoLightbox');
+  const view=document.getElementById('lightboxImage');
+  const count=document.getElementById('lightboxCount');
+  if(!box||!view)return;
+  let photos=[],index=0;
+  function collect(){
+    return [...document.querySelectorAll('#projectList .project > img, #projectList .projectinfo img, #galleryList img')]
+      .filter(im=>im.src && im.offsetParent!==null);
+  }
+  function show(i){
+    if(!photos.length)return;
+    index=(i+photos.length)%photos.length;
+    view.src=photos[index].currentSrc||photos[index].src;
+    view.alt=photos[index].alt||'MAYA SIARA photo';
+    count.textContent=(index+1)+' / '+photos.length;
+  }
+  function open(img){
+    photos=collect();
+    const clicked=photos.indexOf(img);
+    if(clicked<0){photos=[img];index=0;}else{index=clicked;}
+    show(index);
+    box.classList.add('open');
+    box.setAttribute('aria-hidden','false');
+    document.body.style.overflow='hidden';
+  }
+  function close(){
+    box.classList.remove('open');
+    box.setAttribute('aria-hidden','true');
+    document.body.style.overflow='';
+  }
+  document.addEventListener('click',e=>{
+    const img=e.target.closest('#projectList .project > img, #projectList .projectinfo img, #galleryList img');
+    if(img){open(img);}
+  });
+  document.getElementById('lightboxClose').addEventListener('click',close);
+  document.getElementById('lightboxPrev').addEventListener('click',()=>show(index-1));
+  document.getElementById('lightboxNext').addEventListener('click',()=>show(index+1));
+  box.addEventListener('click',e=>{if(e.target===box)close();});
+  document.addEventListener('keydown',e=>{
+    if(!box.classList.contains('open'))return;
+    if(e.key==='Escape')close();
+    if(e.key==='ArrowLeft')show(index-1);
+    if(e.key==='ArrowRight')show(index+1);
+  });
+})();
+
 </script>
+
+<div class="lightbox" id="photoLightbox" aria-hidden="true" role="dialog" aria-label="Photo viewer">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Close photo viewer">×</button>
+  <button class="lightbox-prev" id="lightboxPrev" aria-label="Previous photo">‹</button>
+  <img id="lightboxImage" alt="">
+  <button class="lightbox-next" id="lightboxNext" aria-label="Next photo">›</button>
+  <div class="lightbox-count" id="lightboxCount"></div>
+</div>
+
 </body></html>
