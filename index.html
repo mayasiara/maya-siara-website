@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -7,1037 +6,108 @@
 <meta name="description" content="MAYA SIARA SDN. BHD. — Property development.">
 <meta name="theme-color" content="#f7f6f2">
 <title>MAYA SIARA SDN. BHD. | Property Developer</title>
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Lato:wght@300;400;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-
 <style>
-:root{
---ink:#20221f;
---muted:#777970;
---paper:#f7f6f2;
---sand:#d8c9ad;
---line:#e5e2da;
---white:#fff;
---accent:#9a8057;
---heading:'Playfair Display',serif;
---body:'DM Sans',sans-serif;
---hero-height:470px;
---property-height:290px;
---gallery-height:230px;
---content-width:1160px
-}
-
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body)}
-a{color:inherit;text-decoration:none}
-img{max-width:100%}
-.wrap{width:min(var(--content-width),calc(100% - 48px));margin:auto}
-
-.topbar{
-min-height:82px;
-display:flex;
-align-items:center;
-justify-content:space-between;
-border-bottom:1px solid var(--line);
-gap:20px
-}
-
-.brand{display:flex;align-items:center;gap:13px;min-width:0}
-.brand-logo{width:auto;height:44px;max-width:180px;object-fit:contain}
-.mark{
-width:39px;height:39px;border:1px solid var(--accent);
-display:grid;place-items:center;
-font-family:var(--heading);font-size:22px;color:var(--accent)
-}
-.brandname{font-size:13px;letter-spacing:.19em;font-weight:700}
-.brandname small{
-display:block;font-size:9px;letter-spacing:.2em;
-color:var(--muted);font-weight:500;margin-top:4px
-}
-.nav{display:flex;gap:30px;font-size:11px;letter-spacing:.13em;text-transform:uppercase}
-.nav a:hover{color:var(--accent)}
-.menu{display:none;background:none;border:0;font-size:24px}
-
-.hero{
-min-height:590px;
-display:grid;
-grid-template-columns:.85fr 1.15fr;
-align-items:center;
-gap:55px;
-padding:65px 0
-}
-.eyebrow{
-font-size:10px;letter-spacing:.25em;text-transform:uppercase;
-color:var(--accent);font-weight:700
-}
-.hero h1{
-font-family:var(--heading);font-weight:500;
-font-size:clamp(43px,5vw,68px);
-line-height:1.09;margin:22px 0
-}
-.hero p,.sectionhead p,.aboutcopy p{
-color:var(--muted);font-size:14px;line-height:1.9
-}
-.hero p{max-width:420px}
-.btn{
-display:inline-flex;align-items:center;gap:22px;
-margin-top:23px;background:var(--ink);color:white;
-padding:16px 21px;font-size:10px;
-letter-spacing:.14em;text-transform:uppercase
-}
-.btn span{font-size:17px}
-.heroimg{
-height:var(--hero-height);position:relative;
-background:#ebe8e0;overflow:hidden
-}
-.heroimg img{width:100%;height:100%;object-fit:cover}
-.imgnote{
-position:absolute;bottom:20px;left:0;background:#fff;
-padding:16px 20px;font-size:10px;letter-spacing:.12em;
-text-transform:uppercase
-}
-
-.section{padding:95px 0;border-top:1px solid var(--line)}
-.sectionhead{
-display:flex;justify-content:space-between;
-align-items:end;gap:25px;margin-bottom:38px
-}
-.section h2,.contact h2{
-font-family:var(--heading);font-weight:500;
-font-size:clamp(34px,4vw,48px);
-line-height:1.15;margin:12px 0 0
-}
-.sectionhead p{max-width:370px;margin:0}
-.aboutgrid{
-display:grid;grid-template-columns:1fr 1fr;
-gap:70px;align-items:center
-}
-.aboutphoto{
-min-height:250px;max-height:520px;
-overflow:hidden;background:#ebe8e0
-}
-.aboutphoto img{
-width:100%;height:100%;min-height:250px;object-fit:cover
-}
-.aboutcopy p{line-height:2}
-
-.projects{
-display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
-gap:26px
-}
-.project{background:white;min-width:0}
-.project img{
-width:100%;height:var(--property-height);
-object-fit:cover;display:block;background:#ebe8e0
-}
-.projectinfo{padding:23px 24px}
-.projectinfo small{
-font-size:9px;letter-spacing:.2em;
-text-transform:uppercase;color:var(--accent)
-}
-.projectinfo h3{font:500 25px var(--heading);margin:10px 0}
-.projectinfo p{
-font-size:12px;color:var(--muted);
-line-height:1.7;margin:0
-}
-.empty-state{
-padding:28px;background:#efede7;
-color:var(--muted);font-size:13px;line-height:1.8
-}
-
-.gallery{
-display:grid;grid-template-columns:1.2fr .8fr .8fr;
-gap:14px
-}
-.gallery img{
-width:100%;height:var(--gallery-height);
-object-fit:cover;background:#ebe8e0
-}
-.gallery figure{margin:0}
-.gallery figure:first-child{
-height:calc(var(--gallery-height)*2 + 14px);
-grid-row:span 2
-}
-.gallery figure:first-child img{height:100%}
-.gallery figcaption{
-font-size:11px;color:var(--muted);padding-top:7px
-}
-
-.contact{
-background:#242722;color:#fff;padding:85px 0
-}
-.contact .eyebrow{color:#c8b18b}
-.contact h2{font-size:clamp(38px,5vw,56px)}
-.contact p{color:#c4c5be;line-height:1.8;font-size:13px}
-.contactgrid{
-display:grid;grid-template-columns:1fr 1fr;gap:60px
-}
-.contactlinks{
-display:grid;grid-template-columns:1fr 1fr;
-gap:24px;align-content:center
-}
-.contactlinks small{
-display:block;color:#aaa99f;font-size:9px;
-letter-spacing:.16em;text-transform:uppercase;margin-bottom:9px
-}
-.contactlinks strong{font-size:13px;font-weight:500}
-.contactlinks a:hover{color:#d8c9ad}
-.footer{
-padding:25px 0;color:#a9aaa3;font-size:10px;
-display:flex;justify-content:space-between;gap:20px
-}
-.footer b{color:#fff;font-weight:500}
+:root{--ink:#20221f;--muted:#777970;--paper:#f7f6f2;--sand:#d8c9ad;--line:#e5e2da;--white:#fff;--accent:#9a8057;--heading:'Playfair Display',serif;--body:'DM Sans',sans-serif;--hero-height:470px;--property-height:420px;--gallery-height:230px;--content-width:1160px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body)}a{color:inherit;text-decoration:none}img{max-width:100%}.wrap{width:min(var(--content-width),calc(100% - 48px));margin:auto}
+.topbar{min-height:82px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);gap:20px}.brand{display:flex;align-items:center;gap:13px;min-width:0}.brand-logo{width:auto;height:44px;max-width:180px;object-fit:contain}.mark{width:39px;height:39px;border:1px solid var(--accent);display:grid;place-items:center;font-family:var(--heading);font-size:22px;color:var(--accent)}.brandname{font-size:13px;letter-spacing:.19em;font-weight:700}.brandname small{display:block;font-size:9px;letter-spacing:.2em;color:var(--muted);font-weight:500;margin-top:4px}.nav{display:flex;gap:30px;font-size:11px;letter-spacing:.13em;text-transform:uppercase}.nav a:hover{color:var(--accent)}.menu{display:none;background:none;border:0;font-size:24px}
+.hero{min-height:590px;display:grid;grid-template-columns:.85fr 1.15fr;align-items:center;gap:55px;padding:65px 0}.eyebrow{font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:var(--accent);font-weight:700}.hero h1{white-space:pre-line;font-family:var(--heading);font-weight:500;font-size:clamp(43px,5vw,68px);line-height:1.09;margin:22px 0}.hero p,.sectionhead p,.aboutcopy p{color:var(--muted);font-size:14px;line-height:1.9}.hero p{max-width:420px}.btn{display:inline-flex;align-items:center;gap:22px;margin-top:23px;background:var(--ink);color:white;padding:16px 21px;font-size:10px;letter-spacing:.14em;text-transform:uppercase}.btn span{font-size:17px}.heroimg{height:var(--hero-height);position:relative;background:#ebe8e0;overflow:hidden}.heroimg img{width:100%;height:100%;object-fit:cover}.imgnote{position:absolute;bottom:20px;left:0;background:#fff;padding:16px 20px;font-size:10px;letter-spacing:.12em;text-transform:uppercase}
+.section{padding:95px 0;border-top:1px solid var(--line)}.sectionhead{display:flex;justify-content:space-between;align-items:end;gap:25px;margin-bottom:38px}.section h2,.contact h2{font-family:var(--heading);font-weight:500;font-size:clamp(34px,4vw,48px);line-height:1.15;margin:12px 0 0}.sectionhead p{max-width:370px;margin:0}.aboutgrid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}.aboutphoto{min-height:250px;max-height:520px;overflow:hidden;background:#ebe8e0}.aboutphoto img{width:100%;height:100%;min-height:250px;object-fit:cover}.aboutcopy p{line-height:2}.projects{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:26px}.project{background:white;min-width:0}.project img{width:100%;height:var(--property-height);object-fit:cover;display:block;background:#ebe8e0}.projectinfo{padding:23px 24px}.projectinfo small{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent)}.projectinfo h3{font:500 25px var(--heading);margin:10px 0}.projectinfo p{font-size:12px;color:var(--muted);line-height:1.7;margin:0}.empty-state{padding:28px;background:#efede7;color:var(--muted);font-size:13px;line-height:1.8}.gallery{display:grid;grid-template-columns:1.2fr .8fr .8fr;gap:14px}.gallery img{width:100%;height:var(--gallery-height);object-fit:cover;background:#ebe8e0}.gallery figure{margin:0}.gallery figure:first-child{height:calc(var(--gallery-height)*2 + 14px);grid-row:span 2}.gallery figure:first-child img{height:100%}.gallery figcaption{font-size:11px;color:var(--muted);padding-top:7px}
+.contact{background:#242722;color:#fff;padding:85px 0}.contact .eyebrow{color:#c8b18b}.contact h2{white-space:pre-line;font-size:clamp(38px,5vw,56px)}.contact p{color:#c4c5be;line-height:1.8;font-size:13px}.contactgrid{display:grid;grid-template-columns:1fr 1fr;gap:60px}.contactlinks{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-content:center}.contactlinks small{display:block;color:#aaa99f;font-size:9px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:9px}.contactlinks strong{font-size:13px;font-weight:500}.contactlinks a:hover{color:#d8c9ad}.footer{padding:25px 0;color:#a9aaa3;font-size:10px;display:flex;justify-content:space-between;gap:20px}.footer b{color:#fff;font-weight:500}
 .hidden{display:none!important}
-
-/* IMAGE LIGHTBOX */
-
-.lightbox{
-position:fixed;
-inset:0;
-z-index:99999;
-background:rgba(0,0,0,.94);
-display:none;
-align-items:center;
-justify-content:center;
-padding:65px 75px;
-touch-action:pan-y
-}
-
-.lightbox.active{display:flex}
-
-.lightbox img{
-max-width:100%;
-max-height:84vh;
-width:auto;
-height:auto;
-object-fit:contain;
-user-select:none;
--webkit-user-drag:none;
-box-shadow:0 10px 50px rgba(0,0,0,.4)
-}
-
-.lightbox button{
-position:absolute;
-border:1px solid rgba(255,255,255,.25);
-background:rgba(255,255,255,.12);
-color:white;
-cursor:pointer;
-border-radius:50%;
-width:46px;
-height:46px;
-font-size:28px;
-display:grid;
-place-items:center;
-z-index:3;
-transition:background .2s
-}
-
-.lightbox button:hover{
-background:rgba(255,255,255,.3)
-}
-
-.lightbox-close{
-top:18px;
-right:22px
-}
-
-.lightbox-prev{
-left:20px;
-top:50%;
-transform:translateY(-50%)
-}
-
-.lightbox-next{
-right:20px;
-top:50%;
-transform:translateY(-50%)
-}
-
-.lightbox-count{
-position:absolute;
-bottom:20px;
-left:50%;
-transform:translateX(-50%);
-color:white;
-font-size:13px;
-letter-spacing:2px
-}
-
-.lightbox-caption{
-position:absolute;
-bottom:48px;
-left:50%;
-transform:translateX(-50%);
-color:#ddd;
-font-size:12px;
-text-align:center;
-max-width:80%;
-white-space:nowrap;
-overflow:hidden;
-text-overflow:ellipsis
-}
-
-.lightbox-image{cursor:zoom-in}
-
-@media(max-width:760px){
-.wrap{width:min(100% - 34px,600px)}
-.topbar{min-height:70px}
-.nav{
-display:none;position:absolute;top:70px;left:0;right:0;
-background:var(--paper);padding:25px;z-index:5;
-flex-direction:column;gap:20px;border-bottom:1px solid var(--line)
-}
-.nav.open{display:flex}
-.menu{display:block}
-.hero{
-grid-template-columns:1fr;gap:28px;
-padding:52px 0;min-height:0
-}
-.heroimg{height:min(var(--hero-height),360px)}
-.section{padding:65px 0}
-.sectionhead{display:block}
-.sectionhead p{margin-top:20px}
-.aboutgrid,.contactgrid{grid-template-columns:1fr;gap:30px}
-.aboutphoto{height:290px}
-.projects{grid-template-columns:1fr}
-.project img{height:min(var(--property-height),260px)}
-.gallery{grid-template-columns:1fr 1fr}
-.gallery figure:first-child{
-height:auto;grid-row:auto;grid-column:span 2
-}
-.gallery figure:first-child img{height:230px}
-.gallery img{height:180px}
-.contactlinks{gap:20px}
-.footer{flex-direction:column}
-
-.lightbox{padding:55px 48px}
-.lightbox img{max-width:100%;max-height:76vh}
-.lightbox-prev{left:5px}
-.lightbox-next{right:5px}
-.lightbox-close{top:9px;right:10px}
-.lightbox-count{bottom:14px}
-.lightbox-caption{bottom:38px}
-}
+@media(max-width:760px){.wrap{width:min(100% - 34px,600px)}.topbar{min-height:70px}.nav{display:none;position:absolute;top:70px;left:0;right:0;background:var(--paper);padding:25px;z-index:5;flex-direction:column;gap:20px;border-bottom:1px solid var(--line)}.nav.open{display:flex}.menu{display:block}.hero{grid-template-columns:1fr;gap:28px;padding:52px 0;min-height:0}.heroimg{height:min(var(--hero-height),360px)}.section{padding:65px 0}.sectionhead{display:block}.sectionhead p{margin-top:20px}.aboutgrid,.contactgrid{grid-template-columns:1fr;gap:30px}.aboutphoto{height:290px}.projects{grid-template-columns:1fr}.project img{height:min(var(--property-height),360px)}.gallery{grid-template-columns:1fr 1fr}.gallery figure:first-child{height:auto;grid-row:auto;grid-column:span 2}.gallery figure:first-child img{height:230px}.gallery img{height:180px}.contactlinks{gap:20px}.footer{flex-direction:column}}
 </style>
 </head>
-
 <body>
-
 <header class="wrap topbar">
-<a class="brand" href="#home" id="brandLink">
-<span class="mark" id="brandMark">M</span>
-<img id="brandLogo" class="brand-logo hidden" alt="MAYA SIARA logo">
-<span class="brandname">
-<span id="companyName">MAYA SIARA</span>
-<small id="companySubline">SDN. BHD. · PROPERTY DEVELOPER</small>
-</span>
-</a>
-
-<nav class="nav" id="nav">
-<a href="#home" id="navHome">Home</a>
-<a href="#about" id="navAbout">About Us</a>
-<a href="#projects" id="navProjects">Projects</a>
-<a href="#gallery" id="navGallery">Gallery</a>
-<a href="#contact" id="navContact">Contact</a>
-</nav>
-
-<button class="menu" aria-label="Open menu" onclick="document.getElementById('nav').classList.toggle('open')">☰</button>
+  <a class="brand" href="#home" id="brandLink"><span class="mark" id="brandMark">M</span><img id="brandLogo" class="brand-logo hidden" alt="MAYA SIARA logo"><span class="brandname"><span id="companyName">MAYA SIARA</span><small id="companySubline">SDN. BHD. · PROPERTY DEVELOPER</small></span></a>
+  <nav class="nav" id="nav"><a href="#home" id="navHome">Home</a><a href="#about" id="navAbout">About Us</a><a href="#projects" id="navProjects">Projects</a><a href="#gallery" id="navGallery">Gallery</a><a href="#contact" id="navContact">Contact</a></nav>
+  <button class="menu" aria-label="Open menu" onclick="document.getElementById('nav').classList.toggle('open')">☰</button>
 </header>
-
 <main>
-
 <section class="wrap hero" id="home">
-<div>
-<div class="eyebrow" id="heroEyebrow">Property Development · Malaysia</div>
-<h1 id="heroTitle">Creating places<br>to call <i>home.</i></h1>
-<p id="heroText">MAYA SIARA SDN. BHD. is committed to shaping thoughtful spaces and creating places where people can live, grow and belong.</p>
-<a class="btn" id="heroButton" href="#projects">
-<span id="heroButtonText">Discover our projects</span><span>↗</span>
-</a>
-</div>
-<div class="heroimg" id="heroImageWrap">
-<img id="heroImage" class="hidden" alt="Company banner">
-<div class="imgnote" id="heroImageNote">Thoughtful spaces. Lasting value.</div>
-</div>
+  <div><div class="eyebrow" id="heroEyebrow">Property Development · Malaysia</div><h1 id="heroTitle">Creating places<br>to call <i>home.</i></h1><p id="heroText">MAYA SIARA SDN. BHD. is committed to shaping thoughtful spaces and creating places where people can live, grow and belong.</p><a class="btn" id="heroButton" href="#projects"><span id="heroButtonText">Discover our projects</span><span>↗</span></a></div>
+  <div class="heroimg" id="heroImageWrap"><img id="heroImage" class="hidden" alt="Company banner"><div class="imgnote" id="heroImageNote">Thoughtful spaces. Lasting value.</div></div>
 </section>
-
-<section class="section hidden" id="about">
-<div class="wrap aboutgrid">
-<div class="aboutphoto" id="aboutImageWrap">
-<img id="aboutImage" class="hidden" alt="About MAYA SIARA">
-</div>
-<div class="aboutcopy">
-<div class="eyebrow" id="aboutEyebrow">About Maya Siara</div>
-<h2 id="aboutTitle">Building with purpose.<br>Developing with care.</h2>
-<div id="aboutText"></div>
-</div>
-</div>
-</section>
-
-<section class="section hidden" id="projects">
-<div class="wrap">
-<div class="sectionhead">
-<div>
-<div class="eyebrow" id="projectsEyebrow">What we're developing</div>
-<h2 id="projectsTitle">Our Projects</h2>
-</div>
-<p id="projectsIntro">Explore our property developments.</p>
-</div>
-<div class="projects" id="projectList"></div>
-<div class="empty-state hidden" id="projectsEmpty">Our property listings will be updated soon. Please contact us for enquiries.</div>
-</div>
-</section>
-
-<section class="section hidden" id="gallery">
-<div class="wrap">
-<div class="sectionhead">
-<div>
-<div class="eyebrow" id="galleryEyebrow">A closer look</div>
-<h2 id="galleryTitle">Gallery</h2>
-</div>
-<p id="galleryIntro">A closer look at our developments.</p>
-</div>
-<div class="gallery" id="galleryList"></div>
-</div>
-</section>
-
-<section class="contact" id="contact">
-<div class="wrap contactgrid">
-<div>
-<div class="eyebrow" id="contactEyebrow">Let's connect</div>
-<h2 id="contactTitle">Have a project<br>in mind?</h2>
-<p id="contactIntro">Get in touch with MAYA SIARA SDN. BHD. for company and project enquiries.</p>
-</div>
-<div class="contactlinks" id="contactLinks"></div>
-</div>
-</section>
-
+<section class="section hidden" id="about"><div class="wrap aboutgrid"><div class="aboutphoto" id="aboutImageWrap"><img id="aboutImage" class="hidden" alt="About MAYA SIARA"></div><div class="aboutcopy"><div class="eyebrow" id="aboutEyebrow">About Maya Siara</div><h2 id="aboutTitle">Building with purpose.<br>Developing with care.</h2><div id="aboutText"></div></div></div></section>
+<section class="section hidden" id="projects"><div class="wrap"><div class="sectionhead"><div><div class="eyebrow" id="projectsEyebrow">What we're developing</div><h2 id="projectsTitle">Our Projects</h2></div><p id="projectsIntro">Explore our property developments.</p></div><div class="projects" id="projectList"></div><div class="empty-state hidden" id="projectsEmpty">Our property listings will be updated soon. Please contact us for enquiries.</div></div></section>
+<section class="section hidden" id="gallery"><div class="wrap"><div class="sectionhead"><div><div class="eyebrow" id="galleryEyebrow">A closer look</div><h2 id="galleryTitle">Gallery</h2></div><p id="galleryIntro">A closer look at our developments.</p></div><div class="gallery" id="galleryList"></div></div></section>
+<section class="contact" id="contact"><div class="wrap contactgrid"><div><div class="eyebrow" id="contactEyebrow">Let's connect</div><h2 id="contactTitle">Have a project<br>in mind?</h2><p id="contactIntro">Get in touch with MAYA SIARA SDN. BHD. for company and project enquiries.</p></div><div class="contactlinks" id="contactLinks"></div></div></section>
 </main>
-
-<!-- IMAGE LIGHTBOX -->
-<div class="lightbox" id="imageLightbox" role="dialog" aria-modal="true" aria-label="Image gallery">
-<button class="lightbox-close" id="lightboxClose" aria-label="Close">×</button>
-<button class="lightbox-prev" id="lightboxPrev" aria-label="Previous image">‹</button>
-<img id="lightboxImage" src="" alt="">
-<button class="lightbox-next" id="lightboxNext" aria-label="Next image">›</button>
-<div class="lightbox-caption" id="lightboxCaption"></div>
-<div class="lightbox-count" id="lightboxCount">1 / 1</div>
-</div>
-
-<footer class="wrap footer">
-<span>© <span id="year"></span> <b id="footerCompany">MAYA SIARA SDN. BHD.</b> <span id="footerCopyright">All rights reserved.</span></span>
-<span id="footerTagline">Property Developer · Malaysia</span>
-</footer>
-
+<footer class="wrap footer"><span>© <span id="year"></span> <b id="footerCompany">MAYA SIARA SDN. BHD.</b> <span id="footerCopyright">All rights reserved.</span></span><span id="footerTagline">Property Developer · Malaysia</span></footer>
 <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
-
 <script>
 const OWNER='mayasiara', REPO='maya-siara-website', BRANCH='main';
 const RAW=`https://raw.githubusercontent.com/${OWNER}/${REPO}/${BRANCH}/`;
 const API=`https://api.github.com/repos/${OWNER}/${REPO}/contents/`;
 const $=id=>document.getElementById(id);
-
-const text=(id,value)=>{
-if(value!==undefined&&value!==null&&String(value).trim()!=='')
-$(id).textContent=value
-};
-
-const html=(id,value)=>{
-if(value!==undefined&&value!==null&&String(value).trim()!=='')
-$(id).innerHTML=value
-};
-
-const asset=p=>{
-if(!p)return '';
-if(/^https?:\/\//i.test(p))return p;
-if(p.startsWith('/'))return p;
-return '/maya-siara-website/'+p.replace(/^\.?\//,'')
-};
-
-async function getYaml(path){
-try{
-const r=await fetch(RAW+path,{cache:'no-store'});
-if(!r.ok)return {};
-return jsyaml.load(await r.text())||{}
-}catch(e){
-console.warn('Could not load',path,e);
-return {}
+const text=(id,value)=>{if(value!==undefined&&value!==null&&String(value).trim()!=='')$(id).textContent=value};
+const html=(id,value)=>{if(value!==undefined&&value!==null&&String(value).trim()!=='')$(id).innerHTML=value};
+const asset=p=>{if(!p)return '';if(/^https?:\/\//i.test(p))return p;if(p.startsWith('/'))return p;return '/maya-siara-website/'+p.replace(/^\.?\//,'')};
+async function getYaml(path){try{const r=await fetch(RAW+path,{cache:'no-store'});if(!r.ok)return {};return jsyaml.load(await r.text())||{}}catch(e){console.warn('Could not load',path,e);return {}}}
+function setImage(id,wrapId,path,alt){const img=$(id);if(path){img.src=asset(path);img.alt=alt||'';img.classList.remove('hidden');if(wrapId)$(wrapId).classList.remove('hidden')}else{img.classList.add('hidden');if(wrapId)$(wrapId).classList.add('hidden')}}
+function applyDesign(d={}, t={}, layout={}){
+  const root=document.documentElement.style;
+  const fonts={'DM Sans':"'DM Sans',sans-serif",'Playfair Display':"'Playfair Display',serif",'Montserrat':"'Montserrat',sans-serif",'Lato':"'Lato',sans-serif",'Roboto':"'Roboto',sans-serif"};
+  const headingFont=t.heading_font||t.heading||d.heading_font||d.heading||'Playfair Display';
+  const bodyFont=t.body_font||t.body||d.body_font||d.body||'DM Sans';
+  root.setProperty('--heading',fonts[headingFont]||headingFont);
+  root.setProperty('--body',fonts[bodyFont]||bodyFont);
+  const colorFields=[['--ink','text_color'],['--muted','muted_color'],['--paper','background_color'],['--accent','accent_color'],['--line','line_color']];
+  colorFields.forEach(([css,key])=>{const value=d[key]||d[key.replace('_color','')]||layout[key];if(value)root.setProperty(css,value)});
+  const setPx=(css,...values)=>{const value=values.find(v=>v!==undefined&&v!==null&&v!=='');if(value!==undefined)root.setProperty(css,typeof value==='number'?value+'px':value)};
+  setPx('--content-width',layout.content_width,d.content_width);
+  setPx('--hero-height',layout.hero_height,d.hero_height);
+  setPx('--property-height',layout.property_image_height,layout.property_height,d.property_image_height,420);
+  setPx('--gallery-height',layout.gallery_image_height,layout.gallery_height,d.gallery_image_height);
+  const headingSize=t.heading_size||t.heading_font_size||d.heading_size;
+  const bodySize=t.body_size||t.body_font_size||d.body_size;
+  const navSize=t.navigation_size||t.nav_size;
+  const buttonSize=t.button_size;
+  if(headingSize)document.querySelectorAll('.hero h1').forEach(e=>e.style.fontSize=Number(headingSize)+'px');
+  if(bodySize)document.body.style.fontSize=Number(bodySize)+'px';
+  if(navSize)document.querySelectorAll('.nav').forEach(e=>e.style.fontSize=Number(navSize)+'px');
+  if(buttonSize)document.querySelectorAll('.btn').forEach(e=>e.style.fontSize=Number(buttonSize)+'px');
+  if(d.button_color)document.querySelectorAll('.btn').forEach(e=>e.style.background=d.button_color);
+  if(d.button_text_color)document.querySelectorAll('.btn').forEach(e=>e.style.color=d.button_text_color);
+  const fit=layout.image_fit||layout.property_image_fit||layout.hero_image_fit||d.image_fit;
+  if(fit)document.querySelectorAll('.heroimg img,.project img,.gallery img,.aboutphoto img').forEach(e=>e.style.objectFit=fit);
+  if(layout.gallery_columns||d.gallery_columns){const n=Math.max(1,Math.min(4,Number(layout.gallery_columns||d.gallery_columns)));$('galleryList').style.gridTemplateColumns=`repeat(${n},minmax(0,1fr))`;}
 }
-}
-
-function setImage(id,wrapId,path,alt){
-const img=$(id);
-if(path){
-img.src=asset(path);
-img.alt=alt||'';
-img.classList.remove('hidden');
-if(wrapId)$(wrapId).classList.remove('hidden')
-}else{
-img.classList.add('hidden');
-if(wrapId)$(wrapId).classList.add('hidden')
-}
-}
-
-function applyDesign(d={},t={},layout={}){
-const root=document.documentElement.style;
-
-const fonts={
-'DM Sans':"'DM Sans',sans-serif",
-'Playfair Display':"'Playfair Display',serif",
-'Montserrat':"'Montserrat',sans-serif",
-'Lato':"'Lato',sans-serif",
-'Roboto':"'Roboto',sans-serif"
-};
-
-const headingFont=t.heading_font||t.heading||d.heading_font||d.heading||'Playfair Display';
-const bodyFont=t.body_font||t.body||d.body_font||d.body||'DM Sans';
-
-root.setProperty('--heading',fonts[headingFont]||headingFont);
-root.setProperty('--body',fonts[bodyFont]||bodyFont);
-
-const colorFields=[
-['--ink','text_color'],
-['--muted','muted_color'],
-['--paper','background_color'],
-['--accent','accent_color'],
-['--line','line_color']
-];
-
-colorFields.forEach(([css,key])=>{
-const value=d[key]||d[key.replace('_color','')]||layout[key];
-if(value)root.setProperty(css,value)
-});
-
-const setPx=(css,...values)=>{
-const value=values.find(v=>v!==undefined&&v!==null&&v!=='');
-if(value!==undefined)
-root.setProperty(css,typeof value==='number'?value+'px':value)
-};
-
-setPx('--content-width',layout.content_width,d.content_width);
-setPx('--hero-height',layout.hero_height,d.hero_height);
-setPx('--property-height',layout.property_image_height,layout.property_height,d.property_image_height);
-setPx('--gallery-height',layout.gallery_image_height,layout.gallery_height,d.gallery_image_height);
-
-const headingSize=t.heading_size||t.heading_font_size||d.heading_size;
-const bodySize=t.body_size||t.body_font_size||d.body_size;
-const navSize=t.navigation_size||t.nav_size;
-const buttonSize=t.button_size;
-
-if(headingSize)
-document.querySelectorAll('.hero h1').forEach(e=>e.style.fontSize=Number(headingSize)+'px');
-
-if(bodySize)document.body.style.fontSize=Number(bodySize)+'px';
-if(navSize)document.querySelectorAll('.nav').forEach(e=>e.style.fontSize=Number(navSize)+'px');
-if(buttonSize)document.querySelectorAll('.btn').forEach(e=>e.style.fontSize=Number(buttonSize)+'px');
-
-if(d.button_color)
-document.querySelectorAll('.btn').forEach(e=>e.style.background=d.button_color);
-
-if(d.button_text_color)
-document.querySelectorAll('.btn').forEach(e=>e.style.color=d.button_text_color);
-
-const fit=layout.image_fit||layout.hero_image_fit||d.image_fit;
-
-if(fit)
-document.querySelectorAll('.heroimg img,.project img,.gallery img,.aboutphoto img').forEach(e=>e.style.objectFit=fit);
-
-if(layout.gallery_columns||d.gallery_columns){
-const n=Math.max(1,Math.min(4,Number(layout.gallery_columns||d.gallery_columns)));
-$('galleryList').style.gridTemplateColumns=`repeat(${n},minmax(0,1fr))`
-}
-}
-
-function addContact(label,value,href){
-if(!value)return;
-
-const div=document.createElement('div');
-const small=document.createElement('small');
-small.textContent=label;
-
-const strong=document.createElement('strong');
-
-if(href){
-const a=document.createElement('a');
-a.href=href;
-a.textContent=value;
-
-if(href.startsWith('http')){
-a.target='_blank';
-a.rel='noopener'
-}
-strong.append(a)
-}else{
-strong.textContent=value
-}
-
-div.append(small,strong);
-$('contactLinks').append(div)
-}
-
-async function listMarkdown(folder){
-try{
-const r=await fetch(API+folder+'?ref='+BRANCH,{
-headers:{'Accept':'application/vnd.github+json'}
-});
-
-if(!r.ok)return [];
-
-const files=await r.json();
-
-return await Promise.all(
-files.filter(f=>f.type==='file'&&f.name.endsWith('.md')).map(async f=>{
-try{
-const rr=await fetch(f.download_url);
-const s=await rr.text();
-const m=s.match(/^---\s*\n([\s\S]*?)\n---\s*\n?([\s\S]*)$/);
-
-return m?{...jsyaml.load(m[1]),body:m[2]}:{}
-}catch(e){
-return {}
-}
-})
-)
-}catch(e){
-console.warn('Could not list',folder,e);
-return []
-}
-}
-
-/* RENDER PROPERTY LISTINGS */
-
-function renderProjects(items){
-const list=$('projectList');
-list.replaceChildren();
-
-const visible=items.filter(p=>p.project_name||p.title);
-
-visible.sort((a,b)=>(a.featured===b.featured?0:a.featured?-1:1));
-
-visible.forEach(p=>{
-const article=document.createElement('article');
-article.className='project';
-
-const images=[];
-
-const mainImage=p.main_project_image||p.image;
-
-if(mainImage)images.push(mainImage);
-
-if(Array.isArray(p.project_gallery)){
-p.project_gallery.forEach(g=>{
-const src=typeof g==='string'?g:g.image;
-if(src&&!images.includes(src))images.push(src)
-})
-}
-
-if(mainImage){
-const img=document.createElement('img');
-img.src=asset(mainImage);
-img.alt=p.project_name||p.title||'Property';
-img.loading='lazy';
-article.append(img)
-}
-
-const info=document.createElement('div');
-info.className='projectinfo';
-
-const small=document.createElement('small');
-small.textContent=[p.property_type,p.project_status].filter(Boolean).join(' · ');
-
-const h=document.createElement('h3');
-h.textContent=p.project_name||p.title||'Property';
-
-const para=document.createElement('p');
-
-para.textContent=[
-p.location,
-p.price,
-p.built_up_area,
-p.land_area,
-p.bedrooms?`${p.bedrooms} bedrooms`:null,
-p.bathrooms?`${p.bathrooms} bathrooms`:null,
-p.tenure
-].filter(Boolean).join(' · ');
-
-info.append(small,h,para);
-
-if(p.description){
-const desc=document.createElement('p');
-desc.textContent=String(p.description).replace(/[#*_`>]/g,'').slice(0,260);
-info.append(desc)
-}
-
-if(Array.isArray(p.project_gallery)&&p.project_gallery.length){
-const thumbs=document.createElement('div');
-thumbs.style.cssText='display:flex;gap:8px;flex-wrap:wrap;margin-top:14px';
-
-p.project_gallery.slice(0,4).forEach(g=>{
-const src=typeof g==='string'?g:g.image;
-if(!src)return;
-
-const im=document.createElement('img');
-im.src=asset(src);
-im.alt=p.project_name||'Project gallery';
-im.loading='lazy';
-im.style.cssText='width:72px;height:58px;object-fit:cover';
-thumbs.append(im)
-});
-
-info.append(thumbs)
-}
-
-article.append(info);
-list.append(article)
-});
-
-$('projectsEmpty').classList.toggle('hidden',visible.length>0);
-$('projects').classList.toggle('hidden',visible.length===0)
-}
-
-/* RENDER GALLERY */
-
-function renderGallery(items){
-const list=$('galleryList');
-list.replaceChildren();
-
-[...items].sort((a,b)=>(Number(a.order)||999)-(Number(b.order)||999)).forEach(item=>{
-const src=typeof item==='string'?item:(item.image||item.gallery_image||item.photo);
-if(!src)return;
-
-const fig=document.createElement('figure');
-const img=document.createElement('img');
-
-img.loading='lazy';
-img.src=asset(src);
-img.alt=item.caption||'MAYA SIARA gallery';
-
-fig.append(img);
-
-if(item.caption){
-const cap=document.createElement('figcaption');
-cap.textContent=item.caption;
-fig.append(cap)
-}
-
-list.append(fig)
-});
-
-$('gallery').classList.toggle('hidden',items.length===0)
-}
-
-/* IMAGE LIGHTBOX AND SLIDESHOW */
-
-let lightboxItems=[];
-let lightboxIndex=0;
-let touchStartX=0;
-let touchStartY=0;
-let previousOverflow='';
-
-const lightbox=$('imageLightbox');
-const lightboxImage=$('lightboxImage');
-const lightboxCount=$('lightboxCount');
-const lightboxCaption=$('lightboxCaption');
-
-function openLightbox(items,index=0){
-lightboxItems=items.filter(item=>item&&item.src);
-
-if(!lightboxItems.length)return;
-
-lightboxIndex=Math.max(0,Math.min(index,lightboxItems.length-1));
-
-previousOverflow=document.body.style.overflow;
-document.body.style.overflow='hidden';
-
-lightbox.classList.add('active');
-showLightboxImage();
-
-$('lightboxClose').focus()
-}
-
-function showLightboxImage(){
-if(!lightboxItems.length)return;
-
-const item=lightboxItems[lightboxIndex];
-
-lightboxImage.src=item.src;
-lightboxImage.alt=item.alt||'MAYA SIARA property image';
-
-lightboxCount.textContent=`${lightboxIndex+1} / ${lightboxItems.length}`;
-
-lightboxCaption.textContent=item.caption||'';
-
-$('lightboxPrev').style.display=lightboxItems.length>1?'grid':'none';
-$('lightboxNext').style.display=lightboxItems.length>1?'grid':'none'
-}
-
-function changeLightboxImage(direction){
-if(lightboxItems.length<=1)return;
-
-lightboxIndex=(lightboxIndex+direction+lightboxItems.length)%lightboxItems.length;
-
-showLightboxImage()
-}
-
-function closeLightbox(){
-lightbox.classList.remove('active');
-lightboxImage.src='';
-lightboxItems=[];
-lightboxCaption.textContent='';
-document.body.style.overflow=previousOverflow
-}
-
-/* Click property and gallery images */
-
-document.addEventListener('click',function(e){
-
-if(e.target.closest('#imageLightbox'))return;
-
-const img=e.target.closest(
-'.project img,.gallery img,.heroimg img,.aboutphoto img'
-);
-
-if(!img||img.classList.contains('hidden'))return;
-
-let group=[];
-
-const project=img.closest('.project');
-const gallery=img.closest('#galleryList');
-
-if(project){
-group=[...project.querySelectorAll('img')].map(im=>({
-src:im.src,
-alt:im.alt,
-caption:im.alt
-}))
-}else if(gallery){
-group=[...gallery.querySelectorAll('img')].map(im=>({
-src:im.src,
-alt:im.alt,
-caption:im.alt
-}))
-}else{
-group=[{
-src:img.src,
-alt:img.alt,
-caption:img.alt
-}]
-}
-
-const index=Math.max(
-0,
-[...((project||gallery)?(project||gallery).querySelectorAll('img'):[img])].indexOf(img)
-);
-
-openLightbox(group,index)
-});
-
-/* Navigation buttons */
-
-$('lightboxPrev').addEventListener('click',function(e){
-e.stopPropagation();
-changeLightboxImage(-1)
-});
-
-$('lightboxNext').addEventListener('click',function(e){
-e.stopPropagation();
-changeLightboxImage(1)
-});
-
-$('lightboxClose').addEventListener('click',closeLightbox);
-
-/* Click dark background to close */
-
-lightbox.addEventListener('click',function(e){
-if(e.target===lightbox)closeLightbox()
-});
-
-/* Keyboard controls */
-
-document.addEventListener('keydown',function(e){
-if(!lightbox.classList.contains('active'))return;
-
-if(e.key==='Escape'){
-closeLightbox()
-}else if(e.key==='ArrowRight'){
-changeLightboxImage(1)
-}else if(e.key==='ArrowLeft'){
-changeLightboxImage(-1)
-}
-});
-
-/* Mobile swipe controls */
-
-lightbox.addEventListener('touchstart',function(e){
-if(!lightbox.classList.contains('active'))return;
-
-touchStartX=e.changedTouches[0].screenX;
-touchStartY=e.changedTouches[0].screenY
-},{passive:true});
-
-lightbox.addEventListener('touchend',function(e){
-if(!lightbox.classList.contains('active'))return;
-
-const endX=e.changedTouches[0].screenX;
-const endY=e.changedTouches[0].screenY;
-
-const diffX=endX-touchStartX;
-const diffY=endY-touchStartY;
-
-if(Math.abs(diffX)>50&&Math.abs(diffX)>Math.abs(diffY)){
-changeLightboxImage(diffX<0?1:-1)
-}
-},{passive:true});
-
-/* LOAD WEBSITE CONTENT */
-
+function addContact(label,value,href){if(!value)return;const div=document.createElement('div');const small=document.createElement('small');small.textContent=label;const strong=document.createElement('strong');if(href){const a=document.createElement('a');a.href=href;a.textContent=value;if(href.startsWith('http')){a.target='_blank';a.rel='noopener'}strong.append(a)}else strong.textContent=value;div.append(small,strong);$('contactLinks').append(div)}
+async function listMarkdown(folder){try{const r=await fetch(API+folder+'?ref='+BRANCH,{headers:{'Accept':'application/vnd.github+json'}});if(!r.ok)return [];const files=await r.json();return await Promise.all(files.filter(f=>f.type==='file'&&f.name.endsWith('.md')).map(async f=>{try{const rr=await fetch(f.download_url);const s=await rr.text();const m=s.match(/^---\s*\n([\s\S]*?)\n---\s*\n?([\s\S]*)$/);return m?{...jsyaml.load(m[1]),body:m[2]}:{}}catch(e){return {}}}))}catch(e){console.warn('Could not list',folder,e);return []}}
+function renderProjects(items){const list=$('projectList');list.replaceChildren();const visible=items.filter(p=>p.project_name||p.title);visible.sort((a,b)=>(a.featured===b.featured?0:a.featured?-1:1));visible.forEach(p=>{const article=document.createElement('article');article.className='project';const image=p.main_project_image||p.image;if(image){const img=document.createElement('img');img.src=asset(image);img.alt=p.project_name||p.title||'Property';article.append(img)}const info=document.createElement('div');info.className='projectinfo';const small=document.createElement('small');small.textContent=[p.property_type,p.project_status].filter(Boolean).join(' · ');const h=document.createElement('h3');h.textContent=p.project_name||p.title||'Property';const para=document.createElement('p');para.textContent=[p.location,p.price,p.built_up_area,p.land_area,p.bedrooms?`${p.bedrooms} bedrooms`:null,p.bathrooms?`${p.bathrooms} bathrooms`:null,p.tenure].filter(Boolean).join(' · ');info.append(small,h,para);if(p.description){const desc=document.createElement('p');desc.textContent=String(p.description).replace(/[#*_`>]/g,'').slice(0,260);info.append(desc)}if(Array.isArray(p.project_gallery)&&p.project_gallery.length){const thumbs=document.createElement('div');thumbs.style.cssText='display:flex;gap:8px;flex-wrap:wrap;margin-top:14px';p.project_gallery.slice(0,4).forEach(g=>{const src=typeof g==='string'?g:g.image;if(!src)return;const im=document.createElement('img');im.src=asset(src);im.alt=p.project_name||'Project gallery';im.loading='lazy';im.style.cssText='width:72px;height:58px;object-fit:cover';thumbs.append(im)});info.append(thumbs)}article.append(info);list.append(article)});$('projectsEmpty').classList.toggle('hidden',visible.length>0);$('projects').classList.toggle('hidden',visible.length===0)}
+function renderGallery(items){const list=$('galleryList');list.replaceChildren();[...items].sort((a,b)=>(Number(a.order)||999)-(Number(b.order)||999)).forEach(item=>{const src=typeof item==='string'?item:(item.image||item.gallery_image||item.photo);if(!src)return;const fig=document.createElement('figure');const img=document.createElement('img');img.loading='lazy';img.src=asset(src);img.alt=item.caption||'MAYA SIARA gallery';fig.append(img);if(item.caption){const cap=document.createElement('figcaption');cap.textContent=item.caption;fig.append(cap)}list.append(fig)});$('gallery').classList.toggle('hidden',items.length===0)}
 async function init(){
-
-const [
-company,
-home,
-about,
-design,
-typography,
-layout,
-gallerySettings,
-projects,
-galleryFiles
-]=await Promise.all([
-getYaml('content/settings/company.yml'),
-getYaml('content/settings/homepage.yml'),
-getYaml('content/settings/about.yml'),
-getYaml('content/settings/design.yml'),
-getYaml('content/settings/typography.yml'),
-getYaml('content/settings/image-layout.yml'),
-getYaml('content/settings/gallery.yml'),
-listMarkdown('content/projects'),
-listMarkdown('content/gallery')
-]);
-
-applyDesign(design,typography,layout);
-
-const name=company.company_name||company.name||'MAYA SIARA';
-
-text('companyName',name);
-text('companySubline',company.company_subline||'SDN. BHD. · PROPERTY DEVELOPER');
-text('footerCompany',company.legal_name||name);
-text('footerTagline',company.footer_tagline||'Property Developer · Malaysia');
-text('footerCopyright',company.copyright_text||'All rights reserved.');
-text('year',new Date().getFullYear());
-
-if(company.logo){
-$('brandLogo').src=asset(company.logo);
-$('brandLogo').classList.remove('hidden');
-$('brandMark').classList.add('hidden')
+  const [company,home,about,design,typography,layout,gallerySettings,projects,galleryFiles]=await Promise.all([
+    getYaml('content/settings/company.yml'),
+    getYaml('content/settings/homepage.yml'),
+    getYaml('content/settings/about.yml'),
+    getYaml('content/settings/design.yml'),
+    getYaml('content/settings/typography.yml'),
+    getYaml('content/settings/image-layout.yml'),
+    getYaml('content/settings/gallery.yml'),
+    listMarkdown('content/projects'),
+    listMarkdown('content/gallery')
+  ]);
+  applyDesign(design,typography,layout);
+const name=company.company_name||company.name||'MAYA SIARA';text('companyName',name);text('companySubline',company.company_subline||company.tagline||'SDN. BHD. · PROPERTY DEVELOPER');text('footerCompany',company.legal_name||name);text('footerTagline',company.footer_tagline||'Property Developer · Malaysia');text('footerCopyright',company.copyright_text||'All rights reserved.');text('year',new Date().getFullYear());
+if(company.logo){$('brandLogo').src=asset(company.logo);$('brandLogo').classList.remove('hidden');$('brandMark').classList.add('hidden')}
+const nav=home.navigation||{};[['navHome','home_label','Home'],['navAbout','about_label','About Us'],['navProjects','projects_label','Projects'],['navGallery','gallery_label','Gallery'],['navContact','contact_label','Contact']].forEach(([id,key,def])=>text(id,nav[key]||def));
+text('heroEyebrow',home.eyebrow||home.hero_eyebrow);text('heroTitle',home.title||home.heading||home.title_html);text('heroText',home.description||home.intro||home.hero_description);text('heroButtonText',home.button_text);if(home.button_link)$('heroButton').href=home.button_link;text('heroImageNote',home.image_caption);setImage('heroImage','heroImageWrap',home.banner_image||home.hero_image,'Homepage banner');
+text('aboutEyebrow',about.eyebrow||about.section_eyebrow);text('aboutTitle',about.title||about.heading);const aboutBody=Array.isArray(about.paragraphs)?about.paragraphs:(about.description||about.content?[about.description||about.content]:[]);$('aboutText').replaceChildren();aboutBody.forEach(p=>{const el=document.createElement('p');el.textContent=typeof p==='string'?p:(p.paragraph||p.text||'');if(el.textContent)$('aboutText').append(el)});setImage('aboutImage','aboutImageWrap',about.image,'About MAYA SIARA');$('about').classList.toggle('hidden',!about.title&&!about.image&&!aboutBody.length);
+text('projectsEyebrow',home.projects_eyebrow||"What we're developing");text('projectsTitle',home.projects_title||'Our Projects');text('projectsIntro',home.projects_intro||'Explore our property developments.');renderProjects(projects);
+  text('galleryEyebrow',gallerySettings.eyebrow||home.gallery_eyebrow);
+  text('galleryTitle',gallerySettings.title||home.gallery_title||'Gallery');
+  text('galleryIntro',gallerySettings.description||home.gallery_intro||'A closer look at our developments.');
+  const galleryItems=gallerySettings.images||gallerySettings.gallery_images||gallerySettings.items||galleryFiles;
+  renderGallery(Array.isArray(galleryItems)?galleryItems:[]);
+text('contactEyebrow',company.contact_eyebrow);text('contactTitle',company.contact_title);text('contactIntro',company.contact_intro);$('contactLinks').replaceChildren();addContact(company.phone_label||'Phone',company.phone,company.phone?`tel:${company.phone.replace(/[^+\d]/g,'')}`:null);addContact(company.email_label||'Email',company.email,company.email?`mailto:${company.email}`:null);addContact(company.whatsapp_label||'WhatsApp',company.whatsapp,company.whatsapp?`https://wa.me/${company.whatsapp.replace(/\D/g,'')}`:null);addContact(company.address_label||'Office',company.address,company.google_maps_url||null);if(company.facebook)addContact(company.facebook_label||'Facebook',company.facebook_label||'Visit Facebook',company.facebook);if(company.instagram)addContact(company.instagram_label||'Instagram',company.instagram_label||'Visit Instagram',company.instagram);
+if(home.show_projects===false)$('projects').classList.add('hidden');if(home.show_gallery===false)$('gallery').classList.add('hidden');
 }
-
-const nav=home.navigation||{};
-
-[
-['navHome','home_label','Home'],
-['navAbout','about_label','About Us'],
-['navProjects','projects_label','Projects'],
-['navGallery','gallery_label','Gallery'],
-['navContact','contact_label','Contact']
-].forEach(([id,key,def])=>text(id,nav[key]||def));
-
-text('heroEyebrow',home.eyebrow||home.hero_eyebrow);
-html('heroTitle',home.title_html||home.title);
-text('heroText',home.description||home.hero_description);
-text('heroButtonText',home.button_text);
-
-if(home.button_link)$('heroButton').href=home.button_link;
-
-text('heroImageNote',home.image_caption);
-
-setImage(
-'heroImage',
-'heroImageWrap',
-home.banner_image||home.hero_image,
-'Homepage banner'
-);
-
-text('aboutEyebrow',about.eyebrow||about.section_eyebrow);
-text('aboutTitle',about.title||about.heading);
-
-const aboutBody=about.paragraphs||about.content||[];
-
-$('aboutText').replaceChildren();
-
-aboutBody.forEach(p=>{
-const el=document.createElement('p');
-el.textContent=p;
-$('aboutText').append(el)
-});
-
-setImage('aboutImage','aboutImageWrap',about.image,'About MAYA SIARA');
-
-$('about').classList.toggle(
-'hidden',
-!about.title&&!about.image&&!aboutBody.length
-);
-
-text('projectsEyebrow',home.projects_eyebrow);
-text('projectsTitle',home.projects_title||'Our Projects');
-text('projectsIntro',home.projects_intro);
-
-renderProjects(projects);
-
-text('galleryEyebrow',gallerySettings.eyebrow||home.gallery_eyebrow);
-text('galleryTitle',gallerySettings.title||home.gallery_title||'Gallery');
-text('galleryIntro',gallerySettings.description||home.gallery_intro);
-
-const galleryItems=
-gallerySettings.images||
-gallerySettings.gallery_images||
-gallerySettings.items||
-galleryFiles;
-
-renderGallery(Array.isArray(galleryItems)?galleryItems:[]);
-
-text('contactEyebrow',company.contact_eyebrow);
-text('contactTitle',company.contact_title);
-text('contactIntro',company.contact_intro);
-
-$('contactLinks').replaceChildren();
-
-addContact(
-'Phone',
-company.phone,
-company.phone?`tel:${company.phone.replace(/[^+\d]/g,'')}`:null
-);
-
-addContact(
-'Email',
-company.email,
-company.email?`mailto:${company.email}`:null
-);
-
-addContact(
-'WhatsApp',
-company.whatsapp,
-company.whatsapp?`https://wa.me/${company.whatsapp.replace(/\D/g,'')}`:null
-);
-
-addContact('Office',company.address,company.google_maps_url||null);
-
-if(company.facebook)addContact('Facebook','Visit Facebook',company.facebook);
-if(company.instagram)addContact('Instagram','Visit Instagram',company.instagram);
-
-if(home.show_projects===false)$('projects').classList.add('hidden');
-if(home.show_gallery===false)$('gallery').classList.add('hidden')
-}
-
 init();
-
-document.querySelectorAll('.nav a').forEach(a=>{
-a.addEventListener('click',()=>$('nav').classList.remove('open'))
-});
-
+document.querySelectorAll('.nav a').forEach(a=>a.addEventListener('click',()=>$('nav').classList.remove('open')));
 </script>
-</body>
-</html>
+</body></html>
